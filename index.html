@@ -273,6 +273,10 @@
         .chat-widget { 
             position: fixed; bottom: 30px; right: 30px; z-index: 2000; 
             transition: transform 0.4s ease, opacity 0.4s ease;
+            /* Initially hidden, controlled by JS */
+            transform: translateY(150px);
+            opacity: 0;
+            pointer-events: none;
         }
         .chat-bubble {
             background: #25D366; color: white; width: 60px; height: 60px;
@@ -289,10 +293,15 @@
             box-shadow: 0 5px 15px rgba(0,0,0,0.2); cursor: pointer; z-index: 1999;
             display: flex; gap: 8px; align-items: center; border: 2px solid white;
             transition: transform 0.4s ease, opacity 0.4s ease;
+            /* Initially hidden, controlled by JS */
+            transform: translateY(150px);
+            opacity: 0;
+            pointer-events: none;
         }
         .book-float:hover { transform: scale(1.05); background: var(--accent-color); }
 
         .widget-hidden { transform: translateY(150px) !important; opacity: 0 !important; pointer-events: none !important; }
+        .widget-visible { transform: translateY(0) !important; opacity: 1 !important; pointer-events: auto !important; }
 
         /* --- MODAL --- */
         .modal {
@@ -333,6 +342,55 @@
             .hero-content h1 { font-size: 2.2rem; }
             .hero-btns { flex-direction: column; }
             .hero-btns .btn { width: 100%; }
+            /* Mobile Hero Padding Adjustments */
+            .hero { padding-top: 140px; } /* Increased to clear red bar + nav */
+        }
+        
+        /* --- EXTREME SMALL SCREEN FIXES (250px-350px) --- */
+        @media (max-width: 350px) {
+            /* General container fix */
+            .container { padding-left: 10px !important; padding-right: 10px !important; width: 100% !important; overflow-x: hidden !important; }
+            body, html { overflow-x: hidden !important; max-width: 100% !important; }
+
+            /* Fix Grids - Force Stacking */
+            .highlight-grid, .product-grid, .contact-grid, .services-grid {
+                display: block !important;
+            }
+            
+            /* Highlight Items */
+            .highlight-item {
+                margin-bottom: 10px;
+                border: none !important;
+                border-bottom: 1px solid rgba(255,255,255,0.1) !important;
+            }
+
+            /* Product Items */
+            .product-item { margin-bottom: 20px; width: 100%; }
+
+            /* Hero Section Fixes */
+            .hero { height: auto; min-height: 100vh; padding-top: 160px; /* More space for red bar */ }
+            .hero-content h1 { font-size: 1.8rem !important; line-height: 1.2 !important; margin-bottom: 15px; }
+            .hero-content p { font-size: 1rem !important; margin-bottom: 20px; }
+            .hero-btns { flex-direction: column !important; width: 100% !important; }
+            .hero-btns .btn { width: 100% !important; display: block !important; margin: 5px 0 !important; }
+
+            /* Navigation & Logo */
+            .logo { font-size: 1rem !important; flex-direction: column; align-items: flex-start; }
+            .logo i { font-size: 1.2rem !important; }
+            .menu-toggle { font-size: 1.5rem !important; }
+            
+            /* Comparison Table - Card View */
+            .comparison-table-wrapper table { display: block; }
+            .comparison-table-wrapper thead { display: none; }
+            .comparison-table-wrapper tbody, .comparison-table-wrapper tr, .comparison-table-wrapper td { display: block; width: 100%; }
+            .comparison-table-wrapper tr { margin-bottom: 20px; border: 1px solid #ddd; }
+            
+            /* Floating Buttons */
+            .book-float { right: 10px; bottom: 80px; padding: 8px 15px; font-size: 0.8rem; width: auto; }
+            .chat-widget { right: 10px; bottom: 10px; transform-origin: bottom right; transform: scale(0.8); }
+            
+            /* Footer */
+            .footer-links li { text-align: left; }
         }
     </style>
 </head>
@@ -420,7 +478,7 @@
             <h3 style="margin-bottom: 20px; color: var(--primary-color); border-left: 5px solid var(--accent-color); padding-left: 10px;" data-en="Bended Stirrups (Siraf)" data-si="නමන ලද සිරෆ් කම්බි">Bended Stirrups (Siraf)</h3>
             <div class="product-grid">
                 <div class="product-item" data-aos="zoom-in">
-                    <img src="https://images.unsplash.com/photo-1590082725557-0c7f2025bd19?ixlib=rb-1.2.1&auto=format&fit=crop&w=600&q=80" alt="6mm Stirrups">
+                    <img src="https://plus.unsplash.com/premium_photo-1681691912442-68c4179c530c?q=80&w=871&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="6mm Stirrups">
                     <div class="product-info">
                         <h3 data-en="6mm Series" data-si="6mm ප්‍රමාණ">6mm Series</h3>
                         <p data-en="High quality 6mm mild steel stirrups." data-si="උසස් තත්වයේ 6mm කම්බි.">High quality 6mm mild steel stirrups.</p>
@@ -435,7 +493,7 @@
                     </div>
                 </div>
                 <div class="product-item" data-aos="zoom-in" data-aos-delay="100">
-                    <img src="https://images.unsplash.com/photo-1629806466986-7a195e33d26d?ixlib=rb-1.2.1&auto=format&fit=crop&w=600&q=80" alt="Heavy Duty Stirrups">
+                    <img src="https://images.unsplash.com/photo-1531834685032-c34bf0d84c77?q=80&w=797&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="Heavy Duty Stirrups">
                     <div class="product-info">
                         <h3 data-en="Heavy Duty Series" data-si="විශාල ප්‍රමාණ">Heavy Duty Series</h3>
                         <p data-en="Larger sizes for beams and columns." data-si="බීම් සහ කණු සඳහා විශාල ප්‍රමාණ.">Larger sizes for beams and columns.</p>
@@ -463,7 +521,7 @@
             <h3 style="margin-top: 50px; margin-bottom: 20px; color: var(--primary-color); border-left: 5px solid var(--accent-color); padding-left: 10px;" data-en="Concrete Cover Blocks" data-si="කොන්ක්‍රීට් කවර් කැට">Concrete Cover Blocks</h3>
             <div class="product-grid">
                 <div class="product-item" data-aos="zoom-in">
-                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSqXyN1W4kC_4-F1R3yLzZ9w5uXkH1Q8y1Z6A&s" alt="Cover Blocks">
+                    <img src="https://images.unsplash.com/photo-1533378890784-b2a5b0a59d40?q=80&w=837&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="Cover Blocks">
                     <div class="product-info">
                         <h3 data-en="Standard Cover Blocks" data-si="සම්මත කවර් කැට">Standard Cover Blocks</h3>
                         <p data-en="Essential for maintaining gap between steel and shuttering." data-si="කම්බි සහ ෂටරින් අතර පරතරය තබා ගැනීමට අත්‍යවශ්‍යයි.">Essential for maintaining gap between steel and shuttering.</p>
@@ -619,6 +677,7 @@
             loader.style.opacity = '0';
             setTimeout(() => { loader.style.visibility = 'hidden'; }, 500);
             startHeroSlider();
+            adjustHeaderTop(); // Initial call
         };
 
         // --- HERO SLIDER ---
@@ -692,9 +751,43 @@
 
         function toggleMenu() { document.getElementById('navLinks').classList.toggle('active'); }
         
+        // --- HEADER ADJUSTMENT LOGIC ---
+        function adjustHeaderTop() {
+            const header = document.getElementById("header");
+            const promoBar = document.querySelector('.promo-bar');
+            const promoHeight = promoBar.offsetHeight;
+            if (window.scrollY > 50) { header.style.top = "0"; } else { header.style.top = promoHeight + "px"; }
+        }
+        window.addEventListener("scroll", adjustHeaderTop);
+        window.addEventListener("resize", adjustHeaderTop);
+        
+        // --- SCROLL EVENT (WIDGET VISIBILITY & BACK TO TOP) ---
         window.addEventListener('scroll', () => {
             const backToTop = document.getElementById("backToTop");
+            const widgets = document.querySelectorAll('.chat-widget, .book-float');
+            
+            // Calculate scroll percentage (0.0 to 1.0)
+            const scrollTop = window.scrollY;
+            const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+            const scrollPercent = scrollTop / docHeight;
+
+            // Logic 1: Floating Buttons (Only between 10% and 80%)
+            if (scrollPercent >= 0.10 && scrollPercent <= 0.80) {
+                widgets.forEach(w => {
+                    w.classList.remove('widget-hidden');
+                    w.classList.add('widget-visible');
+                });
+            } else {
+                widgets.forEach(w => {
+                    w.classList.remove('widget-visible');
+                    w.classList.add('widget-hidden');
+                });
+            }
+
+            // Logic 2: Back to Top Button
             if (window.scrollY > 300) { backToTop.style.display = "block"; } else { backToTop.style.display = "none"; }
+            
+            adjustHeaderTop();
         });
 
         function scrollToTop() { window.scrollTo({ top: 0, behavior: "smooth" }); }
