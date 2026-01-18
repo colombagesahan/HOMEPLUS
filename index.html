@@ -329,6 +329,49 @@
         th, td { padding: 15px; text-align: left; }
         th { background: var(--primary-color); color: white; }
         tr:nth-child(even) { background: #f8f9fa; }
+
+        /* --- Construction Section Styles --- */
+        .const-card {
+            background: rgba(255, 255, 255, 0.05); /* Glass effect on dark bg */
+            padding: 30px 20px;
+            border-radius: 12px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            transition: transform 0.3s, background 0.3s;
+            text-align: center;
+        }
+
+        .const-card:hover {
+            transform: translateY(-10px);
+            background: rgba(255, 255, 255, 0.1);
+            border-color: var(--accent-color);
+        }
+
+        .icon-box {
+            width: 70px;
+            height: 70px;
+            background: var(--accent-color);
+            color: white;
+            font-size: 1.8rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            margin: 0 auto 20px;
+            box-shadow: 0 5px 15px rgba(192, 57, 43, 0.4);
+        }
+
+        .const-card h3 {
+            font-size: 1.3rem;
+            margin-bottom: 15px;
+            font-weight: 700;
+            color: white;
+        }
+
+        .const-card p {
+            font-size: 0.95rem;
+            color: #bdc3c7;
+            line-height: 1.5;
+        }
         
         /* RESPONSIVE */
         @media (max-width: 768px) {
@@ -353,7 +396,7 @@
             body, html { overflow-x: hidden !important; max-width: 100% !important; }
 
             /* Fix Grids - Force Stacking */
-            .highlight-grid, .product-grid, .contact-grid, .services-grid, .slab-grid {
+            .highlight-grid, .product-grid, .contact-grid, .services-grid, .slab-grid, .construction-grid {
                 display: block !important;
             }
             
@@ -370,6 +413,12 @@
             /* Slab Section Specific Mobile Fixes */
             .slab-image { margin-bottom: 25px !important; width: 100% !important; }
             .slab-content h3 { font-size: 1.4rem !important; }
+
+            /* Construction Section Mobile Fixes */
+            .const-card {
+                margin-bottom: 20px;
+                padding: 20px 15px;
+            }
 
             /* Hero Section Fixes */
             .hero { height: auto; min-height: 100vh; padding-top: 160px; /* More space for red bar */ }
